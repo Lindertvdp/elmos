@@ -30,9 +30,9 @@ def price_generator():
     price = fake.pyfloat(left_digits=2, right_digits=2, positive=True)
     return price
 
-def provence_generator():
-    provence = fake.province()
-    return provence
+def age_generator():
+    age = fake.random_int(min=10, max=99)
+    return age
 
 def customer_id_generator():
     customer_id = fake.random_int(min=1, max=5000)
@@ -56,14 +56,14 @@ def main(rows):
         orders = products.sample(n=fake.random_int(min=1, max=5))
         orders.reset_index(drop=True)
         customer_id = customer_id_generator()
-        provence = provence_generator()
+        age = age_generator()
         date = date_generator()
         
 
         for index, row in orders.iterrows():
-            data.append([order_id, date, row['name'], row['category'], row['price'], provence, customer_id, quantity_generator()])
+            data.append([order_id, date, row['name'], row['category'], row['price'], age, customer_id, quantity_generator()])
     
-    data = pd.DataFrame(data, columns=['Order ID', 'Date', 'Product', 'Category', 'Price', 'Provence', 'Customer ID', 'Quantity'])
+    data = pd.DataFrame(data, columns=['Order ID', 'Date', 'Product', 'Category', 'Age', 'Provence', 'Customer ID', 'Quantity'])
     data.to_csv('sales_data.csv', index=False)
 
 if __name__ == '__main__':
