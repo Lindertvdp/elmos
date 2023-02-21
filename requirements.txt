@@ -1,0 +1,7 @@
+ipykernel
+pandas
+faker
+requests
+tqdm
+matplotlib
+seaborn
