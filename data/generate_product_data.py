@@ -63,7 +63,7 @@ def main(rows):
         for index, row in orders.iterrows():
             data.append([order_id, date, row['name'], row['category'], row['price'], age, customer_id, quantity_generator()])
     
-    data = pd.DataFrame(data, columns=['Order ID', 'Date', 'Product', 'Category', 'Age', 'Provence', 'Customer ID', 'Quantity'])
+    data = pd.DataFrame(data, columns=['Order ID', 'Date', 'Product', 'Category', 'Price', 'Age', 'Customer ID', 'Quantity'])
     data.to_csv('sales_data.csv', index=False)
 
 if __name__ == '__main__':
