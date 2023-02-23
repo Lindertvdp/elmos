@@ -42,11 +42,13 @@ def quantity_generator():
     quantity = fake.random_int(min=1, max=10)
     return quantity
 
+
 def main(rows):
     # Now let's create a DataFrame with random products from the products DataFrame
     # and add the other attributes
     data = []
     products = pd.read_csv('ikea.csv')
+    customer_age_by_id = {}
 
     for i in tqdm.tqdm(range(rows)):
 
@@ -56,7 +58,13 @@ def main(rows):
         orders = products.sample(n=fake.random_int(min=1, max=5))
         orders.reset_index(drop=True)
         customer_id = customer_id_generator()
-        age = age_generator()
+        # To make sure we get the same age for each customer we add this check
+        # Lets act like people did not get 1 year older last year to keep it simple :)
+        if customer_id in customer_age_by_id:
+            age = customer_age_by_id[customer_id]
+        else:
+            age = age_generator()
+            customer_age_by_id[customer_id] = age
         date = date_generator()
         
 
